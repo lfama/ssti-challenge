@@ -182,6 +182,13 @@ func main() {
 
 	userPwd = pwd
 
+	value, exists := os.LookupEnv("JWTKEY")
+	if !exists {
+		panic("error: JWTKEY it's not defined.")
+	}
+
+	secretKey = []byte(value)
+
 	e.Renderer = t
 
 	f, err := os.OpenFile("logs/log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
